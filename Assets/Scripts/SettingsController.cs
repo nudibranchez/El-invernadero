@@ -40,6 +40,8 @@ public class SettingsController : MonoBehaviour
     private bool vignetteEnabled = true;
     private bool grainEnabled = true;
 
+    [SerializeField] private Animator animator;
+
     void Start()
     {
         LoadPostProcessingPreferences();
@@ -123,8 +125,23 @@ public class SettingsController : MonoBehaviour
     
     private void OnBackButtonClick()
     {
-        settingsCanvas.gameObject.SetActive(false);
-        mainCanvas.gameObject.SetActive(true);
+        TitleCameraController cameraController = FindFirstObjectByType<TitleCameraController>();
+        
+        animator.SetTrigger("SettingsMain");
+        StartCoroutine(TransitionToMainMenu(cameraController));
+    }
+
+    private IEnumerator TransitionToMainMenu(TitleCameraController cameraController)
+    {
+        // Iniciar la rotación
+        cameraController.LookAtMainMenu();
+        
+        // Esperar un tiempo aproximado a la duración de la rotación
+        yield return new WaitForSeconds(0.7f); // Mismo valor que rotationDuration
+        
+        // Cambiar los paneles
+        //settingsCanvas.gameObject.SetActive(false);
+        //mainCanvas.gameObject.SetActive(true);
     }
 
     private void OnVignetteButtonClick()

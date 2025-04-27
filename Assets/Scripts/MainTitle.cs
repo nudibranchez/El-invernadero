@@ -37,6 +37,9 @@ public class MainTitle : MonoBehaviour
     [SerializeField] public Canvas settingsCanvas;
 
 
+    [SerializeField] private Animator animator;
+
+
 
     void Start()
     {
@@ -49,19 +52,6 @@ public class MainTitle : MonoBehaviour
 
         ConfigureButtonHoverEffects(playButton);
         ConfigureButtonHoverEffects(settingsButton);
-        
-        StartCoroutine(FadeOut(initialFadeOutDuration));
-
-
-        if (settingsCanvas != null)
-        {
-            settingsCanvas.gameObject.SetActive(false);
-        }
-        
-        if (mainCanvas != null)
-        {
-            mainCanvas.gameObject.SetActive(true);
-        }
         
         StartCoroutine(FadeOut(initialFadeOutDuration));
     }
@@ -91,8 +81,13 @@ public class MainTitle : MonoBehaviour
 
     private void OnSettingsButtonClick()
     {
-        mainCanvas.gameObject.SetActive(false);
-        settingsCanvas.gameObject.SetActive(true);
+        TitleCameraController cameraController = FindFirstObjectByType<TitleCameraController>();
+        
+        cameraController.LookAtOptions();
+        animator.SetTrigger("MainSettings");
+        // Resto de tu código para mostrar el menú de opciones...
+        //mainCanvas.gameObject.SetActive(false);
+        //settingsCanvas.gameObject.SetActive(true);
     }
 
     public void OnPlayButtonClick()
