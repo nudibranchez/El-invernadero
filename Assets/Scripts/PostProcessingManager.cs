@@ -5,6 +5,8 @@ using UnityEngine.Rendering.Universal;
 public class PostProcessingManager : MonoBehaviour
 {
     [SerializeField] private Volume globalVolume;
+    private Vignette vignette;
+    private FilmGrain grain;
     
     void Start()
     {
