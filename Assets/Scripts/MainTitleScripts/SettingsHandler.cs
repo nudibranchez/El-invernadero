@@ -97,14 +97,15 @@ public class SettingsController : MonoBehaviour
 
     public void OnVignetteButtonClick()
     {
+        vignetteEnabled = !vignetteEnabled;
+        
         PlayerPrefs.SetInt("VignetteEnabled", vignetteEnabled ? 1 : 0);
         PlayerPrefs.Save();
-
-        vignetteEnabled = !vignetteEnabled;
         
         if (vignette != null)
         {
             vignette.active = vignetteEnabled;
+            
             if (globalVolume != null && globalVolume.profile != null)
             {
                 globalVolume.profile.isDirty = true;

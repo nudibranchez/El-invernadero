@@ -27,18 +27,20 @@ public class EnemyBehaviour : MonoBehaviour
     private Renderer enemyRenderer;
     private Collider enemyCollider;
 
+    private Animator animator;
+
+
     void Awake()
     {
         navAgent = GetComponent<NavMeshAgent>();
         enemyRenderer = GetComponent<Renderer>();
         enemyCollider = GetComponent<Collider>();
+        animator = GetComponent<Animator>();
         
-        if (navAgent != null)
-        {
-            navAgent.speed = chaseSpeed;
-            navAgent.updateRotation = true;
-            navAgent.stoppingDistance = 1.5f;
-        }
+        navAgent.speed = chaseSpeed;
+        navAgent.updateRotation = true;
+        navAgent.stoppingDistance = 1.5f;
+        
     }
 
     void Start()
@@ -71,6 +73,7 @@ public class EnemyBehaviour : MonoBehaviour
         isChasing = false;
 
         SetEnemyVisibility(false);
+
         ScheduleNextSpawn();
     }
 
@@ -104,27 +107,27 @@ public class EnemyBehaviour : MonoBehaviour
     private void SetEnemyVisibility(bool visible)
     {
         isVisible = visible;
-
-        if (enemyRenderer != null)
-            enemyRenderer.enabled = visible;
-
+ 
         if (enemyCollider != null)
             enemyCollider.enabled = visible;
         
         if (navAgent != null)
             navAgent.enabled = visible;
+
+        Renderer[] allRenderers = GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in allRenderers)
+        {
+            r.enabled = visible;
+        }
+        
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            collision.gameObject.SendMessage("TakeDamage", 1, SendMessageOptions.DontRequireReceiver);
-
-            StopAllCoroutines();
-            isChasing = false;
-            SetEnemyVisibility(false);
-            ScheduleNextSpawn();
+            animator.SetTrigger("Attack");
+            Debug.Log("GAME OVER");
         }
     }
 }

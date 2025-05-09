@@ -6,7 +6,6 @@ public class ObjectInteraction : MonoBehaviour
 {
     [SerializeField] 
     private LayerMask interactableLayer;
-
     private GameObject lastHoveredObject;
 
     void Update()
@@ -20,7 +19,7 @@ public class ObjectInteraction : MonoBehaviour
             {
                 if (lastHoveredObject != null)
                 {
-                    Debug.Log("No longer hovering: " + lastHoveredObject.name);
+                    //Not implemented yet
                 }
 
                 lastHoveredObject = hit.collider.gameObject;
@@ -31,7 +30,7 @@ public class ObjectInteraction : MonoBehaviour
         {
             if (lastHoveredObject != null)
             {
-                Debug.Log("No longer hovering: " + lastHoveredObject.name);
+                //Not implemented yet
                 lastHoveredObject = null;
             }
         }
@@ -47,6 +46,8 @@ public class ObjectInteraction : MonoBehaviour
 
     public void OnMouseDown()
     {
-        Debug.Log("Clicked on object: " + lastHoveredObject.name);
+        GameHandler.Instance.AddClue();
+        Destroy(lastHoveredObject);
+        lastHoveredObject = null;
     }
 }
