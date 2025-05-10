@@ -15,24 +15,11 @@ public class ObjectInteraction : MonoBehaviour
         
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, interactableLayer))
         {
-            if (lastHoveredObject != hit.collider.gameObject)
-            {
-                if (lastHoveredObject != null)
-                {
-                    //Not implemented yet
-                }
-
-                lastHoveredObject = hit.collider.gameObject;
-                Debug.Log("Hovering over: " + lastHoveredObject.name);
-            }
+            lastHoveredObject = hit.collider.gameObject;
         }
         else
         {
-            if (lastHoveredObject != null)
-            {
-                //Not implemented yet
-                lastHoveredObject = null;
-            }
+            lastHoveredObject = null;
         }
 
         if (Input.GetMouseButtonDown(0)) // 0 is left click

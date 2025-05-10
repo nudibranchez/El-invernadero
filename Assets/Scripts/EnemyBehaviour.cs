@@ -127,7 +127,13 @@ public class EnemyBehaviour : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             animator.SetTrigger("Attack");
-            Debug.Log("GAME OVER");
+
+            // Mostrar pantalla de derrota y pausar el tiempo
+            InterfaceHandler ui = FindFirstObjectByType<InterfaceHandler>();
+            if (ui != null)
+            {
+                ui.ShowLoseScreen();
+            }
         }
     }
 }

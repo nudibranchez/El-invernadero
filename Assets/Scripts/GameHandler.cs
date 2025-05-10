@@ -6,7 +6,7 @@ public class GameHandler : MonoBehaviour
 {
     [Header("Timer Settings")]
     [SerializeField] private TextMeshProUGUI Timer;
-    [SerializeField] private float startTime = 300f; //Reminder: its in seconds
+    [SerializeField] private float startTime = 60f; //Reminder: its in seconds
     
     [Header("Clue Score Settings")]
     [SerializeField] private TextMeshProUGUI clueScoreText;
@@ -17,6 +17,11 @@ public class GameHandler : MonoBehaviour
     private bool timerIsRunning = true;
 
     public static GameHandler Instance { get; private set; }
+
+    [SerializeField] Animator animator;
+
+    [SerializeField] private GameObject goalObject;
+
 
     void Awake()
     {
@@ -68,7 +73,7 @@ public class GameHandler : MonoBehaviour
 
         if (collectedKeys == totalKeys)
         {
-            Debug.Log("¡Todas las pistas encontradas!");
+            animator.SetTrigger("GameWon");
         }
     }
 
