@@ -11,6 +11,7 @@ public class InterfaceHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [Header("UI Elements")]
     [SerializeField] private Image PageImage;
     [SerializeField] private Canvas UICanvas;
+    [SerializeField] private TMPro.TextMeshProUGUI LeaveText;
 
     [Header("Pause Menu")]
     [SerializeField] private Canvas PauseMenu;

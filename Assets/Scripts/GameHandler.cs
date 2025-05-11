@@ -19,9 +19,12 @@ public class GameHandler : MonoBehaviour
     public static GameHandler Instance { get; private set; }
 
     [SerializeField] Animator animator;
+    [SerializeField] Animator uiAnimator;
 
     [SerializeField] private GameObject goalObject;
 
+    [SerializeField] private InterfaceHandler ui;
+    
 
     void Awake()
     {
@@ -53,6 +56,12 @@ public class GameHandler : MonoBehaviour
         {
             currentTime -= Time.deltaTime;
 
+            if (currentTime <= 0)
+            {
+                currentTime = 0;
+                timerIsRunning = false;
+                ui.ShowLoseScreen();
+            }
             UpdateTimerDisplay();
         }
     }
@@ -74,6 +83,7 @@ public class GameHandler : MonoBehaviour
         if (collectedKeys == totalKeys)
         {
             animator.SetTrigger("GameWon");
+            uiAnimator.SetTrigger("AppearLeaveText");
         }
     }
 
