@@ -29,6 +29,9 @@ public class EnemyBehaviour : MonoBehaviour
 
     private Animator animator;
 
+    [SerializeField] private AudioClip SpawnSound;
+    private AudioSource audioSource;
+
 
     void Awake()
     {
@@ -36,6 +39,7 @@ public class EnemyBehaviour : MonoBehaviour
         enemyRenderer = GetComponent<Renderer>();
         enemyCollider = GetComponent<Collider>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         
         navAgent.speed = chaseSpeed;
         navAgent.updateRotation = true;
@@ -67,6 +71,7 @@ public class EnemyBehaviour : MonoBehaviour
         Vector3 spawnPosition = FindSpawnPosition();
         transform.position = spawnPosition;
         SetEnemyVisibility(true);
+        audioSource.PlayOneShot(SpawnSound);
 
         isChasing = true;
         yield return new WaitForSeconds(chaseDuration);
