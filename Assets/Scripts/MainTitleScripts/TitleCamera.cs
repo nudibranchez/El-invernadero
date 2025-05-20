@@ -10,7 +10,7 @@ public class TitleCameraController : MonoBehaviour
     [SerializeField] private bool useParallaxInSettings = true; 
 
     [Header("Menu Transition")]
-    [SerializeField] private float rotationDuration = 0.7f;
+    [SerializeField] private float rotationDuration = 1.5f;
     [SerializeField] private float rotationAmount = 30f; 
     private Vector3 targetPosition;
     private Vector3 initialPosition;

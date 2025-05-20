@@ -1,6 +1,4 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class ObjectInteraction : MonoBehaviour
 {
@@ -33,6 +31,9 @@ public class ObjectInteraction : MonoBehaviour
 
     public void OnMouseDown()
     {
+        AudioSource audio = lastHoveredObject.transform.parent.GetComponent<AudioSource>();
+        audio.Play();
+
         GameHandler.Instance.AddClue();
         Destroy(lastHoveredObject);
         lastHoveredObject = null;

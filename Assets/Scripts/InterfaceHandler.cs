@@ -24,14 +24,9 @@ public class InterfaceHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [Header("Instructions")]
     [SerializeField] private Canvas instructions;
 
-    [Header("Audio")]
-    private AudioSource audioSource;
-    [SerializeField] private AudioClip hoverSound;
-
     void Start()
     {
         animator = GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
         animator.SetBool("IsHovering", false);
         Time.timeScale = 0f;
 
@@ -86,7 +81,7 @@ public class InterfaceHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public void OnPointerEnter(PointerEventData eventData)
     {
         animator.SetBool("IsHovering", true);
-        audioSource.PlayOneShot(hoverSound);
+
     }
     public void OnPointerExit(PointerEventData eventData)
     {
